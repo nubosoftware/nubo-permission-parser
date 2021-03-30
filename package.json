@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      "permission-parser@https://na01.nubosoftware.com:4872/permission-parser/-/permission-parser-0.0.11.tgz",
+      "/mnt/diskB/N7/nubomanagement"
+    ]
+  ],
+  "_from": "permission-parser@https://na01.nubosoftware.com:4872/permission-parser/-/permission-parser-0.0.11.tgz",
+  "_id": "permission-parser@https://na01.nubosoftware.com:4872/permission-parser/-/permission-parser-0.0.11.tgz",
+  "_inBundle": false,
+  "_integrity": "sha512-lZPeDLhA9KJTY84LmrAmb0xSJ2cp4D/nEDummJgQkSZ24nsRAxvx6s/gOoRkDqnL6F8PpVhEfhh0DqbOKlmDhQ==",
+  "_location": "/permission-parser",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "permission-parser@https://na01.nubosoftware.com:4872/permission-parser/-/permission-parser-0.0.11.tgz",
+    "name": "permission-parser",
+    "escapedName": "permission-parser",
+    "rawSpec": "https://na01.nubosoftware.com:4872/permission-parser/-/permission-parser-0.0.11.tgz",
+    "saveSpec": "https://na01.nubosoftware.com:4872/permission-parser/-/permission-parser-0.0.11.tgz",
+    "fetchSpec": "https://na01.nubosoftware.com:4872/permission-parser/-/permission-parser-0.0.11.tgz"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": false,
+  "_shasum": "d05611615c255729273f9b1be6ffc95f3b43c1c7",
+  "_spec": "https://na01.nubosoftware.com:4872/permission-parser/-/permission-parser-0.0.11.tgz",
+  "_where": "/mnt/diskB/N7/nubomanagement",
+  "author": "",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "underscore": "^1.8.3",
+    "validate.js": "^0.9.0"
+  },
+  "deprecated": false,
+  "description": "plugin for restify server that allow control parameters that come with url requests by path",
+  "keywords": [
+    "restify"
+  ],
+  "main": "main.js",
+  "name": "permission-parser",
+  "publishConfig": {
+    "registry": "https://na01.nubosoftware.com:4872/"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.11"
+}
