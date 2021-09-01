@@ -214,12 +214,12 @@ var job = function(_rules, _opts) {
                 return validate.isEmpty(res) ? undefined : res;
 
             } else if (mode === filterMode.BODY) {
-                var bodyConstraints = rules.rules[found].bodyConstraints || {};
-                if (validate.isEmpty(bodyConstraints) && !validate.isEmpty(obj.parameters)) {
+                var bodyConstraints = rules.rules[found].bodyConstraints;
+                if (!bodyConstraints && !validate.isEmpty(obj.parameters)) {
                     return "missing bodyConstraints to validate parameters"
                 }
 
-                if (bodyConstraints) {
+                if (!validate.isEmpty(bodyConstraints)) {
                     try {
                         res = validate(obj.parameters, rules.rules[found].bodyConstraints) || {};
                     } catch (err) {
