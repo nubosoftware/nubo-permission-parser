@@ -3,7 +3,6 @@
 var _ = require("underscore");
 var path = require("path");
 
-var validate = require("validate.js");
 /*
  *  Main class
  *    Arguments:
@@ -27,10 +26,17 @@ var filterMode = {
     BODY: 1
 };
 
-var job = function(_rules, _opts) {
+var validate;
+
+var job = function(_rules, _opts,_validate) {
     var rules = {
         regex: []
     };
+    if (_validate) {
+        validate = _validate;
+    } else {
+        validate = require('validate.js');
+    }
     var self = this;
     var logd, loge, mode;
     var opts = _opts || {};
@@ -85,7 +91,7 @@ var job = function(_rules, _opts) {
         if (true /*JSON.stringify(objByRestify) === JSON.stringify(objByUs)*/ ) {
             checkRes = checker(rules, objByRestify, mode);
             if (checkRes) {
-                loge("url " + req.url + " cannot not pass parameters validation " + JSON.stringify(checkRes));
+                loge("url " + req.url + " cannot not pass parameters validation " + JSON.stringify(checkRes));               
                 console.log("opts.permittedMode: " + opts.permittedMode);
                 if (opts.permittedMode) {
                     next();
@@ -161,7 +167,7 @@ var job = function(_rules, _opts) {
                 path: path.resolve(urlPath),
                 parameters: parameters
             };
-            logd("urlParse return: " + JSON.stringify(res));
+            //logd("urlParse return: " + JSON.stringify(res));
             return res;
         } catch (e) {
             loge("urlParse exception: " + JSON.stringify(e));
@@ -172,6 +178,7 @@ var job = function(_rules, _opts) {
     var checker = function(rules, obj, mode) {
         var found, res;
         //logd("checker path ", JSON.stringify(obj));
+        //console.log(`checker path: ${JSON.stringify(obj,null,2)}`);
         found = rules.hash.indexOf(obj.path);
         if (found !== -1) {
             if (mode === filterMode.URL) {
@@ -185,7 +192,8 @@ var job = function(_rules, _opts) {
                     try {
                         res = validate(obj.parameters, rules.rules[found].constraints) || {};
                     } catch (err) {
-                        return err.toString();
+                        //return err.toString();
+                        return err;
                     }
                     //logd(obj.path + " validate return ", res);
 
@@ -203,7 +211,8 @@ var job = function(_rules, _opts) {
                         try {
                             var singleRes = validate.single(obj.headers[attrname], headerConstraints[attrname]);
                         } catch (err) {
-                            return err.toString();
+                            //return err.toString();
+                            return err;
                         }
                         if (singleRes) {
                             res[attrname] = singleRes;
@@ -223,7 +232,9 @@ var job = function(_rules, _opts) {
                     try {
                         res = validate(obj.parameters, rules.rules[found].bodyConstraints) || {};
                     } catch (err) {
-                        return err.toString();
+                        //return err.toString();
+                        console.log(`validate error. obj.parameters: ${JSON.stringify(obj.parameters,null,2)}, bodyConstraints: ${JSON.stringify(rules.rules[found].bodyConstraints,null,2)}, error: ${err} `);
+                        return err;
                     }
                     // console.log(res)
                     // console.log(obj.parameters)
